@@ -22,3 +22,25 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache
+.parcel-cache
+.vite
+
+# Test & Coverage
+coverage
+.nyc_output
+
+# Temp files
+*.tmp
+*.temp
+*~
+
+# OS files
+Thumbs.db
