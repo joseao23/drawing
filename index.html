@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下一屆會計是...（多啦A夢版）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Mochiypop+One&family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+            background-color: #E6F7FF;
+            color: #333;
+            margin: 0;
+            overflow-x: hidden;
+            background-image: url('https://www.crazy-tutorial.com/blog/wp-content/uploads/2018/10/1-161111103F5-1200x628-600x314.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .dora-blue { color: #00A0E9; }
+        .dora-red { color: #E4002B; }
+        .dora-yellow { color: #FFD700; }
+        .dora-pink { color: #F0558F; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* 標題專用：神奇道具動態特效 */
+        @keyframes title-gadget-float {
+            0% { transform: scale(1) rotate(0deg); filter: brightness(1) drop-shadow(0 0 5px rgba(255,215,0,0)); }
+            25% { transform: scale(1.03) rotate(1deg); filter: brightness(1.2) drop-shadow(0 0 15px rgba(255,215,0,0.5)); }
+            50% { transform: scale(1) rotate(0deg); filter: brightness(1) drop-shadow(0 0 5px rgba(255,215,0,0)); }
+            75% { transform: scale(1.03) rotate(-1deg); filter: brightness(1.2) drop-shadow(0 0 15px rgba(255,215,0,0.5)); }
+            100% { transform: scale(1) rotate(0deg); filter: brightness(1) drop-shadow(0 0 5px rgba(255,215,0,0)); }
+        }
+        .title-dynamic {
+            animation: title-gadget-float 3s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(10deg); }
+            66% { transform: translate(-20px, -100px) rotate(-10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .drifting {
+            animation: drift 20s ease-in-out infinite;
+        }
+
+        @keyframes gentle-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spinning-slow {
+            animation: gentle-spin 15s linear infinite;
+        }
+
+        /* 鈴鐺搖晃動畫 */
+        @keyframes shake-bell {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            10% { transform: translate(-50%, -50%) rotate(15deg); }
+            20% { transform: translate(-50%, -50%) rotate(-15deg); }
+            30% { transform: translate(-50%, -50%) rotate(10deg); }
+            40% { transform: translate(-50%, -50%) rotate(-10deg); }
+            50% { transform: translate(-50%, -50%) rotate(5deg); }
+            60% { transform: translate(-50%, -50%) rotate(-5deg); }
+            100% { transform: translate(-50%, -50%) rotate(0deg); }
+        }
+        .shake-active {
+            animation: shake-bell 0.5s ease-in-out;
+        }
+
+        /* 鈴鐺聲波擴散 */
+        @keyframes bell-ring {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+        }
+        .ring-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border: 4px solid #FFD700;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 25;
+            animation: bell-ring 1s cubic-bezier(0, 0.2, 0.8, 1) forwards;
+        }
+
+        .bubble-border {
+            border: 6px solid #00A0E9;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 0 #0080BA, inset 0 0 20px rgba(0,160,233,0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        .anywhere-door-border {
+            border: 8px solid #F0558F;
+            border-radius: 20px;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.1), inset 0 0 15px rgba(240,85,143,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+            backdrop-filter: blur(4px);
+        }
+        .anywhere-door-border::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            background: #FFD700;
+            border: 2px solid #333;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes rays-rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                rgba(255, 215, 0, 0.3) 10%,
+                transparent 20%,
+                rgba(0, 160, 233, 0.2) 30%,
+                transparent 40%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 60%,
+                rgba(240, 85, 143, 0.2) 70%,
+                transparent 80%,
+                rgba(255, 215, 0, 0.3) 90%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            animation: rays-rotate 10s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        .sparkle {
+            position: absolute;
+            color: #FFD700;
+            font-size: 24px;
+            animation: star-twinkle 1s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gadget-reveal {
+            0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+            60% { transform: scale(1.1) rotate(10deg); opacity: 1; }
+            80% { transform: scale(0.95) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        .gadget-reveal-animation {
+            animation: gadget-reveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
